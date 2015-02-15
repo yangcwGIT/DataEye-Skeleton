@@ -1,6 +1,6 @@
 # DataEye-Skeleton
 
-dataeye前端页面基本骨架
+dataeye前端页面基本骨架，主要展示使用requirejs来构建前端项目，从而实现资源文件的合并压缩、增量更新。
 
 ## 目录说明
 
