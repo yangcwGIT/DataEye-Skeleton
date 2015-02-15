@@ -1,0 +1,14 @@
+{
+	"author": "simonxu <simon@dataeye.com>",
+	"description": "前端构建脚本（基于requirejs）",
+	"scripts": {
+		"start": "node build.js"
+	},
+	"main": "build.js",
+	"dependencies": {
+		"bluebird": "^2.9.9",
+		"requirejs": "^2.1.16",
+		"lodash": "^3.2.0",
+		"glob": "^4.3.5"
+	}
+}
