@@ -1,7 +1,11 @@
 <?php
+	// 是否开发环境，决定了资源的加载方式
 	$debug = false;
+	// web根目录
 	$context_path = '..';
+	// 静态资源目录
 	$static_dir = $debug ? $context_path.'/assets' : $context_path.'/assets-build';
+	// 资源原件md5信息
 	$manifest = file_get_contents('../tools/manifest.json');
 	$manifestJSON = json_decode($manifest);
 ?>
@@ -25,9 +29,6 @@
 		</ul>
 		<!-- 内容页使用MVVM框架生成 -->
 		<div id="container"></div>
-    <!--[if lt IE 9]>
-		<script src="<?php echo $static_dir?>/js/ie8/combined.js"></script>
-		<![endif]-->
 		<script>
 			var App = {
 				// debug模式不会执行css和js合并压缩，分多个请求执行
@@ -52,32 +53,37 @@
 					baseUrl: '<?php echo $static_dir?>/js',
 					paths: {}
 				},
-				// 资源文件元信息
+				// 资源文件md5信息
 				manifest: <?php echo $manifest?>
 			}
 
 			;(function(manifest, config, paths, compat) {
-				// 开发环境不换成脚本
+				// 开发环境不缓存脚本
 				if (App.debug) {
 					config.urlArgs = 'v=' + Date.now()
 					return
 				}
 
-				// 根据manifest清单重写资源path
-				for(var key in manifest) {
+				// 根据manifest重写js资源path
+				for (var key in manifest) {
 					var moduleName = key.replace(/(^\/js\/)|(\.js$)/g, '')
 					paths[moduleName] = './' + moduleName + '.js?v=' + manifest[key]
 				}
 
 				// 非标准浏览器使用对应的兼容脚本
-				if (App.outdated) {
-					for(var name in compat) {
-						paths[name] = paths[compat[name]]
-						delete paths[compat[name]]
+				if (!App.outdated) {
+					for (var name in compat) {
+						var compatModule = paths[compat[name]]
+						if (compatModule) {
+							paths[name] = compatModule
+						}
 					}
 				}
 			})(App.manifest, App.requireConfig, App.requireConfig.paths, App.compat)
 		</script>
+    <!--[if lt IE 9]>
+		<script src="<?php echo $static_dir?>/js/ie8/combined.js"></script>
+		<![endif]-->
 		<script src="<?php echo $static_dir?>/js/require.js"></script>
 		<script src="<?php echo $static_dir?>/js/app/main.js"></script>
 	</body>
