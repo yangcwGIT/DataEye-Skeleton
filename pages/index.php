@@ -71,7 +71,7 @@
 				}
 
 				// 非标准浏览器使用对应的兼容脚本
-				if (!App.outdated) {
+				if (App.outdated) {
 					for (var name in compat) {
 						var compatModule = paths[compat[name]]
 						if (compatModule) {
