@@ -39,7 +39,7 @@ rjs.optimizeAsync = function(config) {
 		rjs.optimize(_.extend({}, config), function (buildResponse) {
 			resolve(buildResponse)
 		}, function(err) {
-			reject(e)
+			reject(err)
 		})
 	})
 }

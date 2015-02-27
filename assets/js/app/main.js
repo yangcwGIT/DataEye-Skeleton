@@ -66,7 +66,6 @@ require(['base'], function() {
 		App.router = router
 		App.addRoute = loadRouteByUrl
 
-		router.init(location.hash || App.defaultRoute)
-
+		router.init(location.hash)
 	})
 })
