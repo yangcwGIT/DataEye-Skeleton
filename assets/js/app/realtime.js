@@ -1,7 +1,10 @@
-define(function() {
+define(['ractive', 'jquery', 'components/res-filter'], function(Ractive, $, ResFilter) {
 	return {
 		render: function() {
-			console.log('realtime')
+			var app = new Ractive({
+				el: '#container',
+				template: '#realtime'
+			})
 		}
 	}
 })

@@ -1,0 +1,46 @@
+{
+	"data": [
+		{
+			"label": "001",
+			"value": 1,
+			"children": [
+				{
+					"label": "100",
+					"value": 100
+				},
+				{
+					"label": "101",
+					"value": 101
+				}
+			]
+		},
+		{
+			"label": "002",
+			"value": 2,
+			"children": [
+				{
+					"label": "200",
+					"value": 200
+				},
+				{
+					"label": "201",
+					"value": 201
+				}
+			]
+		},
+		{
+			"label": "003",
+			"value": 3,
+			"children": [
+				{
+					"label": "300",
+					"value": 300
+				},
+				{
+					"label": "301",
+					"value": 301
+				}
+			]
+		}
+	]
+}
