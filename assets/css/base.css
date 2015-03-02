@@ -2,3 +2,7 @@
 	margin: 10px;
 	background: url(../img/a.jpg)
 }
+
+li.true {
+	color: red;
+}

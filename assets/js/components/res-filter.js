@@ -27,12 +27,17 @@ define(['ractive', 'jquery', 'lodash'], function(Ractive, $, _) {
 			// ajax获取叶子节点
 			self.on('showItems', function(e, val) {
 				var type = _.find(this.get('types'), {checked: true})
+				var keypath = e ? e.keypath : 'subTypes.0'
 
 				$.getJSON(this.get('itemsUrl'), {
-					type: type.value,
+					// TODO 后台应该直接根据小类ID查询
+					type: type && type.value,
 					subType: val
 				}).then(function(json) {
 					self.set('items', json.data)
+
+					self.set('subTypes.*.checked', '')
+					self.set(keypath + '.checked', true)
 				})
 			})
 
@@ -50,7 +55,7 @@ define(['ractive', 'jquery', 'lodash'], function(Ractive, $, _) {
 					if (!keyword) return
 
 					$.getJSON(self.get('searchUrl')).then(function(json) {
-						// 清除选中
+						// 搜索结果并不一定属于单个大类或小类，所以清除大类小类的选中状态
 						self.set('types.*.checked', '')
 						self.set('subTypes.*.checked', '')
 						self.set('items', json.data)

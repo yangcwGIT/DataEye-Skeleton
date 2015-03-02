@@ -124,12 +124,9 @@ function devCompat() {
 		// 代码模板
 		var content = `
 		/*! ~.~ auto generated code for module: ${module.name}, do not edit. ~.~ */
-		define(function() {
-			// orginal include is ${module.include.join(', ')}
-			require([
-				"${module.include.join('",\n"')}"
-			])
-		})`
+		define([
+			"${module.include.join('",\n"')}"
+		], function() {})`
 
 		log('compat for ' + module.name + ' at ' + filepath)
 
